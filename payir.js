@@ -34,7 +34,7 @@ class Payir
      * @param {string} [null] factorNumber Order ID or Invoice Number
      * @throws Will throw an error if URL building isn't successfull.
      */
-    send(amount, callbackURL, factorNumber){
+    send({amount, callbackURL, factorNumber, mobile , description}){
         const $this = this;
         factorNumber = factorNumber || null;
         return new Promise((resolve, reject) => {
@@ -46,7 +46,7 @@ class Payir
                 throw new Error('Callback URL must start with http/https');
             this.request.post({
                 url: this.sendEndPoint,
-                form: {api: $this.api, amount, redirect: callbackURL, factorNumber}
+                form: {api: $this.api, amount, redirect: callbackURL, factorNumber,mobile,description}
             }, (error, response, body) => {
                 if(error)
                     reject(error.code);
